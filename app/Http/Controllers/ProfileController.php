@@ -2,22 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Profile;
+use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
     public function index()
     {
+        $profiles = Profile::latest()->get();
+
         return view('layouts.public.profiles', [
             "title" => "All Profiles",
-            "profiles" => Profile::latest()->get()
+            "profiles" => $profiles
         ]);
-        
     }
 
-    public function show(Profile $profile)
+    public function profile()
     {
-        return view('layouts.public.profile', compact('profile'));
+        return view('layouts.public.profile');
+    }
+
+    public function contact()
+    {
+        return view('layouts.public.contact');
     }
 }

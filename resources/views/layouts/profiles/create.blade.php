@@ -1,48 +1,34 @@
-@extends('profiles.layout')
-  
-@section('content')
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Add New Product</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('products.index') }}"> Back</a>
-        </div>
-    </div>
-</div>
-   
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <strong>Whoops!</strong> There were some problems with your input.<br><br>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-   
-<form action="{{ route('products.store') }}" method="POST">
+@extends('layouts.private.index')
+
+@section('container')
+<h1>Buat Produk baru</h1>
+<form method="POST" action="/layouts/profiles" enctype="multipart/form-data">
     @csrf
-  
-     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Name:</strong>
-                <input type="text" name="name" class="form-control" placeholder="Name">
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Detail:</strong>
-                <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail"></textarea>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+    <div class="mb-3">
+        <label for="title" class="form-label">Judul</label>
+        <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}">
     </div>
-   
+    <div class="mb-3">
+        <label for="slug" class="form-label">Slug</label>
+        <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug') }}">
+    </div>
+    <div class="mb-3">
+        <label for="category" class="form-label">Kategori</label>
+        <select name="category_id" class="form-select">
+            @foreach ($categories as $category)
+            <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @endforeach
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="image" class="form-label">Gambar Profil</label>
+        <input type="file" class="form-control" id="image" name="image">
+    </div>
+    <div class="mb-3">
+        <label for="biografi" class="form-label">Isi Profil</label>
+        <input id="biografi" type="hidden" name="biografi" value="{{ old('biografi') }}">
+        <trix-editor input="biografi"></trix-editor>
+    </div>
+    <button type="submit" class="btn btn-primary">Simpan</button>
 </form>
 @endsection

@@ -19,12 +19,9 @@ class CreateProfilesTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('user_id');
             $table->string('slug')->unique();
-            $table->string('excerpt');
-            $table->text('biografi');
+            $table->text('excerpt');
+            $table->longText('biografi');
             $table->timestamps();
-
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

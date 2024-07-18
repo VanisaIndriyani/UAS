@@ -1,4 +1,4 @@
-@extends('layouts.public.dashboard')
+@extends('layouts.private.dashboard')
  
 @section('container')
     <div class="row">

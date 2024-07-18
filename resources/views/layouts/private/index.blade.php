@@ -1,124 +1,164 @@
-@extends('layouts.public.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Dashboard</title>
+    <!-- Custom fonts for this template-->
+    <link rel="stylesheet" href="{{ asset('assets/public/vendor/fontawesome-free/css/all.min.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/basecamp/trix@master/dist/trix.css">
 
-@section('content')
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
-        <!-- Sidebar Toggle-->
-        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-        <!-- Navbar Search-->
-        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-            </div>
-        </form>
-        <!-- Navbar-->
-        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">Pengaturan</a></li>
-                    <li><a class="dropdown-item" href="#!">Log Aktivitas</a></li>
-                    <li><hr class="dropdown-divider" /></li>
-                    <li><a class="dropdown-item" href="#!">Logout</a></li>
-                </ul>
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/basecamp/trix@master/dist/trix.js"></script>
+
+    <!-- Custom styles for this template-->
+    <link href="{{ asset('asset/public/css/sb-admin-2.css') }}" rel="stylesheet" />
+    <link href="{{ asset('asset/public/css/sb-admin-2.min.css') }}" rel="stylesheet" />
+<!-- 
+    {{-- Trix Editor --}}
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
+    <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script> -->
+
+    <!-- <style>
+        trix-toolbar [data-trix-button-group="file-tools"]{
+            display: none;
+        }
+    </style> -->
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
+                <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-shopping-bag fa-3x"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Dashboard Vanisa</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item {{ Request::is('dashboard*') ? 'active' : ''}}" aria-current="page">
+                <a class="nav-link" href="/dashboard">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
             </li>
+            <hr class="sidebar-divider">
+            <li class="nav-item {{ Request::is('dashboard/homes*') ? 'active' : ''}}">
+                <a class="nav-link" href="/dashboard/homes">
+                    <i class="fa-solid fa-gears"></i>
+                    <span>My Home</span></a>
+            </li>
+            <hr class="sidebar-divider">
+            <li class="nav-item {{ Request::is('dashboard/profiles*') ? 'active' : ''}}">
+                <a class="nav-link" href="/dashboard/products">
+                    <i class="fa-solid fa-gears"></i>
+                    <span>My Produk</span></a>
+            </li>
+            <hr class="sidebar-divider">
+            <li class="nav-item {{ Request::is('dashboard/contacts*') ? 'active' : ''}}">
+                <a class="nav-link" href="/dashboard/contacts">
+                    <i class="fa-solid fa-gears"></i>
+                    <span>My Contact</span></a>
+            </li>
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
         </ul>
-    </nav>
-    <div id="layoutSidenav">
-        <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                <div class="sb-sidenav-menu">
-                    <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Inti</div>
-                        <a class="nav-link" href="{{ route('dashboard') }}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Dashboard
-                        </a>
-                        <div class="sb-sidenav-menu-heading">Antarmuka</div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Layouts
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="profiles">CRUD Home</a>
-                                <a class="nav-link" href="{{ route('profile') }}">CRUD Profile</a>
-                            </nav>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <!-- Topbar Search -->
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
                         </div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            Pages
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                    Authentication
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </form>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <div class="topbar-divider d-none d-sm-block"></div>
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
+                                <img class="img-profile rounded-circle" src="{{ asset('assets/public/assets/gambar1.png') }} " alt="..." />
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                {{-- <a class="dropdown-item" href="/home">
+                                    <button class="dropdown-item">My Home</button>
+                                </a> --}}
+                                <a class="dropdown-item">
+                                    {{-- <a class="dropdown-item" href="{{ route('home') }}">Back, Home</a> --}}
+                                    <form action="/logout" method="POST">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">Logout</button>
+                                    </form>
                                 </a>
-                                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="login.html">Login</a>
-                                        <a class="nav-link" href="register.html">Register</a>
-                                        <a class="nav-link" href="password.html">Lupa Password</a>
-                                    </nav>
-                                </div>
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                    Error
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="401.html">Halaman 401</a>
-                                        <a class="nav-link" href="404.html">Halaman 404</a>
-                                        <a class="nav-link" href="500.html">Halaman 500</a>
-                                    </nav>
-                                </div>
-                            </nav>
-                        </div>
-                        <div class="sb-sidenav-menu-heading">Addons</div>
-                        <a class="nav-link" href="charts.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Charts
-                        </a>
-                        <a class="nav-link" href="tables.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Tables
-                        </a>
-                    </div>
+                            </div>
+                            
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!-- Page Heading -->
+                        @yield('container')
                 </div>
-                <div class="sb-sidenav-footer">
-                    <div class="small">Masuk sebagai:</div>
-                    Start Bootstrap
-                </div>
-            </nav>
-        </div>
-        <div id="layoutSidenav_content">
-            <main>
-                @yield('container')
-            </main>
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid px-4">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Hak Cipta &copy; Situs Anda 2023</div>
-                        <div>
-                            <a href="#">Kebijakan Privasi</a>
-                            &middot;
-                            <a href="#">Syarat &amp; Ketentuan</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="{{ asset('js/scripts2.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="{{ asset('assets/demo/chart-area-demo.js') }}"></script>
-    <script src="{{ asset('assets/demo/chart-bar-demo.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-    <script src="{{ asset('js/datatables-simple-demo.js') }}"></script>
-@endsection
+
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Your Website 2021</span>
+            </div>
+        </div>
+    </footer>
+    <!-- End of Footer -->
+
+    
+
+      <!-- Bootstrap core JS-->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{{ asset('asset/public/js/scripts.js') }}"></script>
+</body>
+
+
+</html>

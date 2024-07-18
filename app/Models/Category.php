@@ -5,14 +5,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class category extends Model
+class Category extends Model
 {
     use HasFactory;
 
-    protected $guarded =['id'];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'slug',
+        'description',
+        'image_url',
+        'user_id',
+    ];
 
-    public function profiles()
+    /**
+     * Get the user that owns the category.
+     */
+    public function user()
     {
-        return $this->hasMany(Profile::class);
+        return $this->belongsTo(User::class);
     }
 }

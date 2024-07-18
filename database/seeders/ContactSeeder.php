@@ -1,7 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Contact;
+use App\Models\User; // Sesuaikan jika diperlukan
 
 class ContactSeeder extends Seeder
 {
@@ -12,11 +15,17 @@ class ContactSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('contacts')->insert([
-            'name' => 'Vanisa',
+        // Contoh menggunakan User ID statis
+        $user = User::first(); // Ganti dengan cara mendapatkan user yang sesuai
+
+        Contact::create([
             'user_id' => 1,
-            'email' => 'Vanisaindri@gmail.com',
-            'phonenumber' => '085809134960',
+            'name' => 'vanisa',
+            'email' => 'vanisa@gmail.com',
+            'phone_number' => '123456789',
+            'message' => 'Hallo ini vanisa ',
         ]);
+
+        // Tambahkan lebih banyak data jika diperlukan
     }
 }

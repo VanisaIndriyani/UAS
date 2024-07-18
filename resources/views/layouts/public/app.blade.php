@@ -28,7 +28,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
                             <li class="nav-item"><a class="nav-link {{ Request::is('home*') ? 'active' : ''}}" href="{{ route('home') }}">Home</a></li>
-                            <li class="nav-item"><a class="nav-link {{ Request::is('profile*') ? 'active' : ''}}" href="{{ route('profile') }}">Profile</a></li>
+                            <li class="nav-item"><a class="nav-link {{ Request::is('profile*') ? 'active' : ''}}" href="{{ route('profile') }}">Produk</a></li>
                             <li class="nav-item"><a class="nav-link {{ Request::is('contact*') ? 'active' : ''}}" href="{{ route('contact') }}">Contact</a></li>
                             <li class="nav-item"><a class="nav-link {{ Request::is('categories*') ? 'active' : ''}}" href="{{ route('categories') }}">Categories</a></li>
                             @auth 

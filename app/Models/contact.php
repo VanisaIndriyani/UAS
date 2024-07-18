@@ -5,18 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class contact extends Model
+class Contact extends Model
 {
     use HasFactory;
-    public function index()
-    {
-        return Home::all();
-    }
 
-    protected $guarded = ['id'];
+    protected $fillable = [
+        'user_id',
+        'name',
+        'email',
+        'phone_number',
+        'message',
+    ];
 
-    public function author()
+    // Relationship example if needed
+    public function user()
     {
-        return $this->belongsTo(user::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
 }

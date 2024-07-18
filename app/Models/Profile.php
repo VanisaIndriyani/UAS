@@ -4,36 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\Sluggable;
 
 class Profile extends Model
 {
-    use HasFactory, Sluggable;
+    use HasFactory;
 
-    protected $guarded = ['id'];
-    protected $with = ['category', 'author'];
+    protected $fillable = [
+        'title', 'category_id', 'user_id', 'slug', 'excerpt', 'biografi'
+    ];
 
+    // Relationship with Category
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
-    
-    public function author()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
 
-    public function getRouteKeyName()
+    // Relationship with User
+    public function user()
     {
-        return 'slug';
-    }
-
-    public function sluggable(): array
-    {
-        return [
-            'slug' => [
-                'source' => 'title'
-            ]
-        ];
+        return $this->belongsTo(User::class);
     }
 }
